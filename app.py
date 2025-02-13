@@ -91,7 +91,11 @@ class OpenRouterResearchAnalyzer:
         try:
             response = self.client.chat.completions.create(
                 model=self.model,
-                messages=[{"role": "user", "content": prompt}]
+                messages=[{"role": "user", "content": prompt}],
+                extra_headers={
+                    "HTTP-Referer": "https://github.com/Devashish-dixit",
+                    "X-Title": "Research Analysis Tool"
+                }
             )
             return response.choices[0].message.content
         except Exception as e:
