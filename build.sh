@@ -1,17 +1,20 @@
 #!/bin/bash
 
-# Set up directories
-mkdir -p $HOME/wkhtmltopdf
+# Create a directory for wkhtmltopdf
+mkdir -p $HOME/bin
 
-# Download precompiled wkhtmltopdf binary
-wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb -O $HOME/wkhtmltox.deb
+# Download precompiled static binary
+wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1-linux-generic-amd64.tar.xz -O $HOME/wkhtmltox.tar.xz
 
-# Extract the .deb package manually
-dpkg-deb -x $HOME/wkhtmltox.deb $HOME/wkhtmltopdf
+# Extract the tar file
+tar -xf $HOME/wkhtmltox.tar.xz -C $HOME/bin --strip-components=1
 
-# Set the correct path for the binary
-export WKHTMLTOPDF_PATH="$HOME/wkhtmltopdf/usr/local/bin/wkhtmltopdf"
+# Ensure the binary is executable
+chmod +x $HOME/bin/bin/wkhtmltopdf
 
-# Add to PATH
-echo "export PATH=$HOME/wkhtmltopdf/usr/local/bin:\$PATH" >> $HOME/.profile
-echo "export WKHTMLTOPDF_PATH=$HOME/wkhtmltopdf/usr/local/bin/wkhtmltopdf" >> $HOME/.profile
+# Set the correct path for wkhtmltopdf
+export WKHTMLTOPDF_PATH="$HOME/bin/bin/wkhtmltopdf"
+
+# Add it to the PATH so the app can find it
+echo "export PATH=$HOME/bin/bin:\$PATH" >> $HOME/.profile
+echo "export WKHTMLTOPDF_PATH=$HOME/bin/bin/wkhtmltopdf" >> $HOME/.profile
