@@ -5,5 +5,3 @@ requests
 nest-asyncio
 groq
 openai
-markdown
-pdfkit
