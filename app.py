@@ -105,52 +105,75 @@ def convert_df_to_csv(df):
     return df.to_csv(index=False).encode('utf-8')
 
 def main():
-    st.image("https://i.ibb.co/twk5x4HD/RATfor-Render.png",  use_container_width=True)
-    st.title("RAT (Research Analysis Tool)")
-    
+    st.image("https://i.ibb.co/twk5x4HD/RATfor-Render.png", use_column_width=True)
+    st.title("Research Analysis Tool (RAT)")
+
     if 'groq_api_key' not in st.session_state:
         st.session_state['groq_api_key'] = ""
     if 'openrouter_api_key' not in st.session_state:
         st.session_state['openrouter_api_key'] = ""
-    
+    if 'csv_data' not in st.session_state:
+        st.session_state['csv_data'] = None
+    if 'csv_summaries' not in st.session_state:
+        st.session_state['csv_summaries'] = None
+    if 'df' not in st.session_state:
+        st.session_state['df'] = None
+    if 'df_with_summaries' not in st.session_state:
+        st.session_state['df_with_summaries'] = None
+    if 'insights' not in st.session_state:
+        st.session_state['insights'] = ""
+
     st.session_state['groq_api_key'] = st.text_input("Enter your Groq API Key:", type="password")
     st.session_state['openrouter_api_key'] = st.text_input("Enter your OpenRouter API Key:", type="password")
-    
+
     groq_model = st.selectbox("Select Groq Model:", [
         "llama-3.1-8b-instant", "llama-3.3-70b-versatile", "llama-3.3-70b-specdec",
         "deepseek-r1-distill-llama-70b", "mixtral-8x7b-32768"
     ], index=3)
-    
+
     openrouter_model = st.selectbox("Select OpenRouter Model:", [
         "deepseek/deepseek-r1-distill-llama-70b:free", "deepseek/deepseek-r1:free", "deepseek/deepseek-chat:free",
         "google/gemini-2.0-flash-lite-preview-02-05:free", "google/gemini-2.0-pro-exp-02-05:free",
         "qwen/qwen-vl-plus:free", "qwen/qwen2.5-vl-72b-instruct:free",
         "meta-llama/llama-3.3-70b-instruct:free", "mistralai/mistral-nemo:free"
     ], index=3)
-    
+
     summarizer = GroqAbstractSummarizer(st.session_state['groq_api_key'], groq_model)
     analyzer = OpenRouterResearchAnalyzer(st.session_state['openrouter_api_key'], openrouter_model)
-    
+
     user_query = st.text_input("Enter your research query:")
     max_pages = st.number_input("Max pages to crawl:", min_value=1, max_value=10, value=3)
-    
+
     if st.button("Start Analysis"):
         df = run_arxiv_crawler(user_query, max_pages)
         if df.empty:
             st.error("No research papers found.")
             return
-        
-        st.dataframe(df)
-        csv_data = convert_df_to_csv(df)
-        st.download_button("Download Papers CSV", csv_data, "papers.csv", "text/csv")
+
+        st.session_state['df'] = df
+        st.session_state['csv_data'] = convert_df_to_csv(df)
         
         df_with_summaries = summarizer.process_dataframe(df)
-        st.dataframe(df_with_summaries)
-        csv_summaries = convert_df_to_csv(df_with_summaries)
-        st.download_button("Download Summaries CSV", csv_summaries, "summaries.csv", "text/csv")
-        
+        st.session_state['df_with_summaries'] = df_with_summaries
+        st.session_state['csv_summaries'] = convert_df_to_csv(df_with_summaries)
+
         insights = analyzer.analyze_research_titles(df_with_summaries)
-        st.markdown(insights)
+        st.session_state['insights'] = insights
+
+    if st.session_state['df'] is not None:
+        st.dataframe(st.session_state['df'])
+        st.download_button("Download Papers CSV", st.session_state['csv_data'], "papers.csv", "text/csv")
+
+    if st.session_state['df_with_summaries'] is not None:
+        st.dataframe(st.session_state['df_with_summaries'])
+        st.download_button("Download Summaries CSV", st.session_state['csv_summaries'], "summaries.csv", "text/csv")
+
+    if st.session_state['insights']:
+        st.markdown(st.session_state['insights'])
+
+if __name__ == "__main__":
+    main()
+
 
 if __name__ == "__main__":
     main()
