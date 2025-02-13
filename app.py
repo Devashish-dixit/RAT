@@ -103,10 +103,18 @@ def extract_markdown(text):
     match = re.search(r"(# .|## .|### .*)", text, re.DOTALL)
     return match.group(1) if match else text
 
+WKHTMLTOPDF_PATH = os.path.expanduser("~/wkhtmltopdf/usr/local/bin/wkhtmltopdf")
+config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_PATH)
+
 def markdown_to_pdf(md_text, output_filename="output.pdf"):
     html_text = markdown.markdown(md_text)
-    options = {'page-size': 'A4', 'encoding': 'UTF-8', 'enable-local-file-access': None}
-    pdfkit.from_string(html_text, output_filename, options=options)
+    options = {'page-size': 'A4', 'encoding': 'UTF-8'}
+    
+    pdfkit.from_string(html_text, output_filename, options=options, configuration=config)
+    
+    with open(output_filename, "rb") as f:
+        return f.read()
+
 
 def convert_df_to_csv(df):
     return df.to_csv(index=False).encode('utf-8')
