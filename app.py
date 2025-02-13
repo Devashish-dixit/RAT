@@ -104,12 +104,12 @@ def extract_markdown(text):
     return match.group(1) if match else text
 
 # Ensure the correct path is used
-WKHTMLTOPDF_PATH = os.path.expanduser("~/wkhtmltopdf/usr/local/bin/wkhtmltopdf")
+WKHTMLTOPDF_PATH = "/opt/render/wkhtmltopdf/usr/local/bin/wkhtmltopdf"
 
-# Debug: Print the path
-print(f"Checking for wkhtmltopdf at: {WKHTMLTOPDF_PATH}")
+# Debugging
+print(f"Checking wkhtmltopdf at: {WKHTMLTOPDF_PATH}")
 
-# Check if the file exists before using it
+# Verify the file exists before using it
 if not os.path.exists(WKHTMLTOPDF_PATH):
     raise FileNotFoundError(f"wkhtmltopdf not found at {WKHTMLTOPDF_PATH}")
 
@@ -124,6 +124,7 @@ def markdown_to_pdf(md_text, output_filename="output.pdf"):
     
     with open(output_filename, "rb") as f:
         return f.read()
+
 
 
 def convert_df_to_csv(df):
