@@ -106,8 +106,9 @@ def convert_df_to_csv(df):
 
 def main():
     st.image("https://i.ibb.co/twk5x4HD/RATfor-Render.png", use_column_width=True)
-    st.title("Research Analysis Tool (RAT)")
+    st.title("RAT (Research Analysis Tool)")
 
+    # Initialize session state variables
     if 'groq_api_key' not in st.session_state:
         st.session_state['groq_api_key'] = ""
     if 'openrouter_api_key' not in st.session_state:
@@ -123,8 +124,8 @@ def main():
     if 'insights' not in st.session_state:
         st.session_state['insights'] = ""
 
-    st.session_state['groq_api_key'] = st.text_input("Enter your Groq API Key:", type="password")
-    st.session_state['openrouter_api_key'] = st.text_input("Enter your OpenRouter API Key:", type="password")
+    st.session_state['groq_api_key'] = st.text_input("Enter your Groq API Key:", type="password", key="groq_key")
+    st.session_state['openrouter_api_key'] = st.text_input("Enter your OpenRouter API Key:", type="password", key="openrouter_key")
 
     groq_model = st.selectbox("Select Groq Model:", [
         "llama-3.1-8b-instant", "llama-3.3-70b-versatile", "llama-3.3-70b-specdec",
@@ -141,8 +142,8 @@ def main():
     summarizer = GroqAbstractSummarizer(st.session_state['groq_api_key'], groq_model)
     analyzer = OpenRouterResearchAnalyzer(st.session_state['openrouter_api_key'], openrouter_model)
 
-    user_query = st.text_input("Enter your research query:")
-    max_pages = st.number_input("Max pages to crawl:", min_value=1, max_value=10, value=3)
+    user_query = st.text_input("Enter your research query:", key="query_input")
+    max_pages = st.number_input("Max pages to crawl:", min_value=1, max_value=10, value=3, key="max_pages_input")
 
     if st.button("Start Analysis"):
         df = run_arxiv_crawler(user_query, max_pages)
@@ -170,10 +171,6 @@ def main():
 
     if st.session_state['insights']:
         st.markdown(st.session_state['insights'])
-
-if __name__ == "__main__":
-    main()
-
 
 if __name__ == "__main__":
     main()
