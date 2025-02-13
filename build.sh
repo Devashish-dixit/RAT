@@ -1,20 +1,17 @@
 #!/bin/bash
 
-# Create a directory for wkhtmltopdf
-mkdir -p $HOME/bin
+# Set up directories
+mkdir -p /opt/render/wkhtmltopdf
 
-# Download precompiled static binary
-wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1-linux-generic-amd64.tar.xz -O $HOME/wkhtmltox.tar.xz
+# Download precompiled wkhtmltopdf binary
+wget -O /opt/render/wkhtmltox.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb
 
-# Extract the tar file
-tar -xf $HOME/wkhtmltox.tar.xz -C $HOME/bin --strip-components=1
+# Extract the .deb package
+dpkg-deb -x /opt/render/wkhtmltox.deb /opt/render/wkhtmltopdf
 
-# Ensure the binary is executable
-chmod +x $HOME/bin/bin/wkhtmltopdf
+# Set permissions
+chmod +x /opt/render/wkhtmltopdf/usr/local/bin/wkhtmltopdf
 
-# Set the correct path for wkhtmltopdf
-export WKHTMLTOPDF_PATH="$HOME/bin/bin/wkhtmltopdf"
-
-# Add it to the PATH so the app can find it
-echo "export PATH=$HOME/bin/bin:\$PATH" >> $HOME/.profile
-echo "export WKHTMLTOPDF_PATH=$HOME/bin/bin/wkhtmltopdf" >> $HOME/.profile
+# Export path so Streamlit can find it
+echo "export PATH=/opt/render/wkhtmltopdf/usr/local/bin:\$PATH" >> /opt/render/.profile
+echo "export WKHTMLTOPDF_PATH=/opt/render/wkhtmltopdf/usr/local/bin/wkhtmltopdf" >> /opt/render/.profile
