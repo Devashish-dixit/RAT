@@ -103,13 +103,13 @@ def extract_markdown(text):
     match = re.search(r"(# .|## .|### .*)", text, re.DOTALL)
     return match.group(1) if match else text
 
-# Define the expected path
-WKHTMLTOPDF_PATH = "/opt/render/wkhtmltopdf/usr/local/bin/wkhtmltopdf"
+# Define the correct path
+WKHTMLTOPDF_PATH = "/opt/render/wkhtmltopdf/wkhtmltopdf"
 
 # Debugging: Check if wkhtmltopdf exists
 if not os.path.exists(WKHTMLTOPDF_PATH):
     print("Error: wkhtmltopdf not found at", WKHTMLTOPDF_PATH)
-    os.system("ls -lah /opt/render/wkhtmltopdf/usr/local/bin/")  # Debugging
+    os.system("ls -lah /opt/render/wkhtmltopdf/")  # Debugging
     raise FileNotFoundError(f"wkhtmltopdf not found at {WKHTMLTOPDF_PATH}")
 
 # Configure pdfkit
