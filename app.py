@@ -102,7 +102,7 @@ def convert_df_to_csv(df):
 
 def main():
     st.image("https://i.ibb.co/twk5x4HD/RATfor-Render.png", use_column_width=True)
-    st.title("Research Analysis Tool (RAT)")
+    st.title("RAT (Research Analysis Tool)")
     
     if 'groq_api_key' not in st.session_state:
         st.session_state['groq_api_key'] = ""
