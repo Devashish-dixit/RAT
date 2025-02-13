@@ -4,8 +4,6 @@ import asyncio
 import os
 import json
 import re
-import markdown
-import pdfkit
 import urllib.parse
 import requests
 from io import BytesIO
@@ -99,33 +97,6 @@ class OpenRouterResearchAnalyzer:
         except Exception as e:
             return "Analysis failed"
 
-def extract_markdown(text):
-    match = re.search(r"(# .|## .|### .*)", text, re.DOTALL)
-    return match.group(1) if match else text
-
-# Define the correct path
-WKHTMLTOPDF_PATH = "/opt/render/wkhtmltopdf/wkhtmltopdf"
-
-# Debugging: Check if wkhtmltopdf exists
-if not os.path.exists(WKHTMLTOPDF_PATH):
-    print("Error: wkhtmltopdf not found at", WKHTMLTOPDF_PATH)
-    os.system("ls -lah /opt/render/wkhtmltopdf/")  # Debugging
-    raise FileNotFoundError(f"wkhtmltopdf not found at {WKHTMLTOPDF_PATH}")
-
-# Configure pdfkit
-config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_PATH)
-
-def markdown_to_pdf(md_text, output_filename="output.pdf"):
-    html_text = markdown.markdown(md_text)
-    options = {'page-size': 'A4', 'encoding': 'UTF-8'}
-    
-    pdfkit.from_string(html_text, output_filename, options=options, configuration=config)
-    
-    with open(output_filename, "rb") as f:
-        return f.read()
-
-
-
 def convert_df_to_csv(df):
     return df.to_csv(index=False).encode('utf-8')
 
@@ -163,8 +134,6 @@ def main():
         
         insights = analyzer.analyze_research_titles(df_with_summaries)
         st.markdown(insights)
-        pdf_bytes = markdown_to_pdf(extract_markdown(insights), "insights.pdf")
-        st.download_button("Download Insights PDF", pdf_bytes, "insights.pdf", "application/pdf")
 
 if __name__ == "__main__":
     main()
