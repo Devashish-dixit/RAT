@@ -64,7 +64,7 @@ class GroqAbstractSummarizer:
         self.model = model
 
     def generate_summary(self, abstract):
-        prompt = f"Summarize this research paper abstract: {abstract}"
+        prompt = f"Summarize this research paper abstract in 1-2 sentences, focusing on the key findings and implications:\n\nAbstract: {abstract}\n\nProvide only the summary without any additional commentary."
         try:
             response = self.client.chat.completions.create(
                 messages=[{"role": "user", "content": prompt}],
@@ -87,7 +87,17 @@ class OpenRouterResearchAnalyzer:
 
     def analyze_research_titles(self, df):
         research_data = [{'title': row['title'], 'summary': row['summary'], 'pdf_link': row['pdf_link']} for _, row in df.iterrows()]
-        prompt = f"Analyze these research papers: {json.dumps(research_data)}"
+        prompt = f"""Analyze these research papers in detail and generate output as a markdown:
+
+Research Data:
+{json.dumps(research_data, indent=2)}
+
+Strictly provide:
+1. Top 3 emerging research subfields and trends
+2. 2-3 understudied research opportunities
+3. Most promising breakthrough research questions
+4. Potential cross-disciplinary insights
+5.cite refernces using pdf links at the end of the output"""
         try:
             response = self.client.chat.completions.create(
                 model=self.model,
