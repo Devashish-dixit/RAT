@@ -59,7 +59,7 @@ def run_arxiv_crawler(user_query, max_pages):
     return asyncio.run(crawl_arxiv(search_url, max_pages))
 
 class GroqAbstractSummarizer:
-    def __init__(self, api_key, model="deepseek-r1-distill-llama-70b"):
+    def __init__(self, api_key, model):
         self.client = Groq(api_key=api_key)
         self.model = model
 
@@ -81,7 +81,7 @@ class GroqAbstractSummarizer:
         return df_out
 
 class OpenRouterResearchAnalyzer:
-    def __init__(self, api_key, model="google/gemini-2.0-flash-lite-preview-02-05:free"):
+    def __init__(self, api_key, model):
         self.client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
         self.model = model
 
@@ -111,8 +111,20 @@ def main():
     st.session_state['groq_api_key'] = st.text_input("Enter your Groq API Key:", type="password")
     st.session_state['openrouter_api_key'] = st.text_input("Enter your OpenRouter API Key:", type="password")
     
-    summarizer = GroqAbstractSummarizer(st.session_state['groq_api_key'])
-    analyzer = OpenRouterResearchAnalyzer(st.session_state['openrouter_api_key'])
+    groq_model = st.selectbox("Select Groq Model:", [
+        "llama-3.1-8b-instant", "llama-3.3-70b-versatile", "llama-3.3-70b-specdec",
+        "deepseek-r1-distill-llama-70b", "mixtral-8x7b-32768"
+    ], index=3)
+    
+    openrouter_model = st.selectbox("Select OpenRouter Model:", [
+        "deepseek/deepseek-r1-distill-llama-70b:free", "deepseek/deepseek-r1:free", "deepseek/deepseek-chat:free",
+        "google/gemini-2.0-flash-lite-preview-02-05:free", "google/gemini-2.0-pro-exp-02-05:free",
+        "qwen/qwen-vl-plus:free", "qwen/qwen2.5-vl-72b-instruct:free",
+        "meta-llama/llama-3.3-70b-instruct:free", "mistralai/mistral-nemo:free"
+    ], index=3)
+    
+    summarizer = GroqAbstractSummarizer(st.session_state['groq_api_key'], groq_model)
+    analyzer = OpenRouterResearchAnalyzer(st.session_state['openrouter_api_key'], openrouter_model)
     
     user_query = st.text_input("Enter your research query:")
     max_pages = st.number_input("Max pages to crawl:", min_value=1, max_value=10, value=3)
