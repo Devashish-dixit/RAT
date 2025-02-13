@@ -104,6 +104,11 @@ def extract_markdown(text):
     return match.group(1) if match else text
 
 WKHTMLTOPDF_PATH = os.path.expanduser("~/wkhtmltopdf/usr/local/bin/wkhtmltopdf")
+
+# Check if the file exists before using it
+if not os.path.exists(WKHTMLTOPDF_PATH):
+    raise FileNotFoundError(f"wkhtmltopdf not found at {WKHTMLTOPDF_PATH}")
+# Pass the correct configuration to pdfkit
 config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_PATH)
 
 def markdown_to_pdf(md_text, output_filename="output.pdf"):
@@ -114,7 +119,6 @@ def markdown_to_pdf(md_text, output_filename="output.pdf"):
     
     with open(output_filename, "rb") as f:
         return f.read()
-
 
 def convert_df_to_csv(df):
     return df.to_csv(index=False).encode('utf-8')
