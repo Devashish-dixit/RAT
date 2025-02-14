@@ -45,7 +45,7 @@ To use RAT, you'll need API keys for both Groq and OpenRouter. Follow these step
 
 ## Getting Started
 
-To run RAT locally or on Google Colab:
+To run RAT web app locally:
 
 1. **Clone the Repository**
   ```bash
@@ -63,6 +63,8 @@ pip install -r requirements.txt
 streamlit run app.py
 
 ```
-For a quick start, simply click the Colab badge or the web app at the top to open the project in Google Colab.
+Or you can download and use the interactive python notebook locally.
+
+For a quick start though, simply click the Colab badge or the web app at the top to open the project in Google Colab.
 
 Happy Researching!
