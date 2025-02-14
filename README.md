@@ -2,6 +2,8 @@
 
 [![Open in Colab](https://dummycolablink.com)](https://dummycolablink.com) [![Open App](https://dummyrenderlink.com)](https://dummyrenderlink.com)
 
+![RAT](https://dummyimage.com/workflow)
+
 ## Overview
 The Research Analysis Tool (RAT) is a cutting-edge Python application designed to streamline the academic research process. By automating paper discovery, summarization, and in-depth analysis, RAT empowers researchers to make data-driven decisions efficiently and effectively.
 
