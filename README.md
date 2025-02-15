@@ -4,8 +4,7 @@
 [![Open App](https://img.shields.io/badge/Open%20App-Live-blue?style=for-the-badge)](https://rat-r0u0.onrender.com)
 
 
-![RAT]([https://dummyimage.com/RAT_tiltle](https://github.com/Devashish-dixit/RAT/blob/main/images/RATforRender.png))
-
+![RAT](https://github.com/Devashish-dixit/RAT/blob/main/images/RATforRender.png)
 ## Overview
 The Research Analysis Tool (RAT) is a cutting-edge Python application designed to streamline the academic research process. By automating paper discovery, summarization, and in-depth analysis, RAT empowers researchers to make data-driven decisions efficiently and effectively.
 
