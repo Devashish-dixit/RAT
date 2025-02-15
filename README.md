@@ -4,7 +4,7 @@
 [![Open App](https://img.shields.io/badge/Open%20App-Live-blue?style=for-the-badge)](https://rat-r0u0.onrender.com)
 
 
-![RAT](https://dummyimage.com/RAT_tiltle)
+![RAT]([https://dummyimage.com/RAT_tiltle](https://github.com/Devashish-dixit/RAT/blob/main/images/RATforRender.png))
 
 ## Overview
 The Research Analysis Tool (RAT) is a cutting-edge Python application designed to streamline the academic research process. By automating paper discovery, summarization, and in-depth analysis, RAT empowers researchers to make data-driven decisions efficiently and effectively.
@@ -31,7 +31,7 @@ The Research Analysis Tool (RAT) is a cutting-edge Python application designed t
    Finally, RAT ensures that every reference is properly cited using the provided PDF links, and a complete research report is generated, ready for download as a PDF.
 
 <!-- Placeholder for workflow visualization image -->
-![Workflow Diagram](https://dummyimage.com/workflow)
+![Workflow Diagram]([https://dummyimage.com/workflow](https://github.com/Devashish-dixit/RAT/blob/main/images/RATworkflow.png))
 
 ## API Keys & Setup Instructions
 
@@ -40,12 +40,12 @@ To use RAT, you'll need API keys for both Groq and OpenRouter. Follow these step
 1. **Groq API Key**  
    Register on the [Groq site](https://console.groq.com/) and follow their instructions to obtain your API key.  
    <!-- Placeholder for Groq API key setup image -->
-   ![Groq API Key Setup](https://dummyimage.com/groq-api)
+   ![Groq API Key Setup](https://github.com/Devashish-dixit/RAT/blob/main/images/groqapikey.png)
 
 2. **OpenRouter API Key**  
    Register on the [OpenRouter platform](https://openrouter.ai/) and secure your API key by following their detailed guidelines.  
    <!-- Placeholder for OpenRouter API key setup image -->
-   ![OpenRouter API Key Setup](https://dummyimage.com/openrouter-api)
+   ![OpenRouter API Key Setup]([https://dummyimage.com/openrouter-api](https://github.com/Devashish-dixit/RAT/blob/main/images/Openrouterapikey.png))
 
 ## Getting Started
 
