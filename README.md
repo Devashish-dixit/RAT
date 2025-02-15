@@ -44,8 +44,7 @@ To use RAT, you'll need API keys for both Groq and OpenRouter. Follow these step
 2. **OpenRouter API Key**  
    Register on the [OpenRouter platform](https://openrouter.ai/) and secure your API key by following their detailed guidelines.  
    <!-- Placeholder for OpenRouter API key setup image -->
-   ![OpenRouter API Key Setup]([https://dummyimage.com/openrouter-api](https://github.com/Devashish-dixit/RAT/blob/main/images/Openrouterapikey.png))
-
+   ![OpenRouter API Key Setup](https://github.com/Devashish-dixit/RAT/blob/main/images/Openrouterapikey.png)
 ## Getting Started
 
 To run RAT web app locally:
