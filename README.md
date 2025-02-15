@@ -30,7 +30,7 @@ The Research Analysis Tool (RAT) is a cutting-edge Python application designed t
    Finally, RAT ensures that every reference is properly cited using the provided PDF links, and a complete research report is generated, ready for download as a PDF.
 
 <!-- Placeholder for workflow visualization image -->
-![Workflow Diagram]([https://dummyimage.com/workflow](https://github.com/Devashish-dixit/RAT/blob/main/images/RATworkflow.png))
+![Workflow Diagram](https://github.com/Devashish-dixit/RAT/blob/main/images/RATworkflow.png)
 
 ## API Keys & Setup Instructions
 
