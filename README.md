@@ -1,5 +1,7 @@
 # RAT (Research Analysis Tool)
 
+[![Open in Colab](https://dummycolablink.com)](https://colab.research.google.com/drive/1ODMONDhrKzaGUZcDuedUXy6yZ2rnF4uL?usp=sharing)  
+[![Open App](https://dummyrenderlink.com)](https://rat-r0u0.onrender.com)
 
 ![RAT](https://dummyimage.com/RAT_tiltle)
 
