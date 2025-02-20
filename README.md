@@ -8,7 +8,7 @@
 ## Overview
 The Research Analysis Tool (RAT) is a cutting-edge Python application designed to streamline the academic research process. By automating paper discovery, summarization, and in-depth analysis, RAT empowers researchers to make data-driven decisions efficiently and effectively.
 
-🎥 **Want a quick walkthrough? Check out my YouTube video explaining RAT!** [Watch Here](https://www.youtube.com/watch?v=krOetiFzSvg&t=9s)
+🎥 **Want a quick walkthrough? Check out my YouTube video explaining RAT!** [Watch Here](https://www.youtube.com/watch?v=krOetiFzSvg)
 
 ## Workflow
 
